@@ -1,0 +1,102 @@
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { ChevronDown, Menu, ShoppingCart, UserCircle } from "lucide-react";
+
+type Props = {};
+
+export default function Header({}: Props) {
+  return (
+    <header className="bg-white">
+      <section className="p-4 lg:px-8 lg:py-6 flex justify-between items-center mb-4 lg:mb-0">
+        <section className="flex items-center">
+
+          {/* Logo */}
+          <Link href="/">
+            <Image
+              src="/logo.png"
+              alt="logo sabrinasport image"
+              width={100}
+              height={60}
+              className="block lg:hidden"
+            />
+            <Image
+              src="/logo.png"
+              alt="logo sabrinasport image"
+              width={150}
+              height={90}
+              className="hidden lg:block"
+            />
+          </Link>
+
+          {/* Input Search Desktop & Tablet */}
+          <section className="ml-6 hidden sm:flex w-full max-w-lg items-center space-x-2">
+            <Input
+              type="text"
+              placeholder="Buscar producto"
+              className="md:w-96 inline"
+            />
+            <Button type="submit" className="inline">
+              Buscar
+            </Button>
+          </section>
+        </section>
+
+        <section className="flex items-center">
+          {/* User Account */}
+          <section className="mr-4 hidden lg:flex items-center">
+            <UserCircle size={28} className="mr-1" />
+            {/* <div className="font-medium text-base">Sign In</div> */}
+            <div className="flex items-center">
+              Cesar
+              <ChevronDown size={16}/>
+            </div>
+          </section>
+
+          {/* Cart */}
+          <section className="mr-4 flex items-center">
+            <div className="mr-3 relative">
+              <ShoppingCart size={28} />
+              <div className="w-5 py-0.5 absolute bottom-3 left-4 font-bold flex justify-center items-center rounded-full bg-red-600 text-white text-xs">
+                9
+              </div>
+            </div>
+            <section className="text-gray-500 text-xs">$55,30</section>
+          </section>
+          {/* Burger */}
+          <Menu size={28} className="lg:hidden" />
+        </section>
+      </section>
+
+      {/* Input Search Mobile */}
+      <section className="px-4 pt-0 pb-4 lg:p-8 flex w-full mx-auto max-w-sm items-center space-x-2 sm:hidden">
+        <Input type="text" placeholder="Buscar producto" />
+        <Button type="submit">Buscar</Button>
+      </section>
+
+      <nav className="h-8 hidden bg-gray-50 lg:flex lg:justify-evenly lg:items-center font-medium border-red-600 border-b-2">
+        <Link
+          href=""
+          className="h-full px-2 flex items-center bg-red-600 text-white hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white"
+        >
+          opcion 1
+        </Link>
+        <Link href="" className="h-full px-2 flex items-center hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white">
+          opcion 2
+        </Link>
+        <Link href="" className="h-full px-2 flex items-center hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white">
+          opcion 3
+        </Link>
+        <Link href="" className="h-full px-2 flex items-center hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white">
+          opcion 4
+        </Link>
+        <Link href="" className="h-full px-2 flex items-center hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white">
+          opcion 5
+        </Link>
+      </nav>
+    </header>
+  );
+}
