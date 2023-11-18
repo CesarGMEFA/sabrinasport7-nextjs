@@ -19,7 +19,7 @@ export default function TiendaPage({}: Props) {
   return (
     <main className="p-4 lg:px-8 lg:py-12 lg:flex">
       {/* Siderbar Section */}
-      <section className="flex items-center justify-center flex-col lg:bg-white lg:w-72 lg:py-12">
+      <section className="h-max flex items-center justify-start flex-col lg:bg-white lg:w-72 lg:py-12">
         {/* Select Mobile */}
         <section className="mb-5 lg:hidden">
           <Select>
@@ -82,7 +82,7 @@ export default function TiendaPage({}: Props) {
       </section>
 
       {/* Product list */}
-      <section className="flex flex-wrap gap-3">
+      <section className="mt-5 lg:mt-0 flex flex-wrap gap-3">
         <ProductCard />
         <ProductCard />
         <ProductCard />
