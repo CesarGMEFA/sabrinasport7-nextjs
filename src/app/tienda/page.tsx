@@ -40,7 +40,7 @@ export default function TiendaPage({}: Props) {
             </SelectContent>
           </Select>
         </section>
-        <Separator className="w-72 bg-red-400 lg:hidden" />
+        <Separator className="w-72 bg-red-400 lg:hidden mb-5" />
 
         {/* Menu Selection Tablet and Desktop */}
         <h2 className="hidden lg:block text-2xl font-semibold">
@@ -82,7 +82,7 @@ export default function TiendaPage({}: Props) {
       </section>
 
       {/* Product list */}
-      <section className="mt-5 lg:mt-0 flex flex-wrap gap-3">
+      <section className="lg:mx-auto xl:ml-7 2xl:mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-12 2xl:gap-16">
         <ProductCard />
         <ProductCard />
         <ProductCard />

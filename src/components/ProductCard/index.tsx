@@ -18,7 +18,7 @@ type Props = {};
 
 export default function ProductCard({}: Props) {
   return (
-    <Card className="w-64 p-3 mb-8 mx-auto">
+    <Card className="w-64 md:w-60 lg:w-56 p-3 mb-8 mx-auto">
       <CardHeader className="p-0">
         <Image
           src="/products/top_naranja_1.jpg"
