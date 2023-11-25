@@ -1,3 +1,5 @@
 ## Para el commit
-- Cambio de fuente de Inter a Lato.
+- Elimine espacio en utils
 - Desarrollo del product page
+- Creacion de la pagina cuentas
+- agregacion de componente label y radio-group
