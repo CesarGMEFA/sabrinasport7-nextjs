@@ -1,5 +1,5 @@
 ## Para el commit
-- Elimine espacio en utils
-- Desarrollo del product page
-- Creacion de la pagina cuentas
-- agregacion de componente label y radio-group
+- se agrego el componente menubar, sheet
+- creacion de los componentes MenuMobileHeader y MenuAccountHeader.
+- se quito var en layout app.
+- trabajando en los formularios

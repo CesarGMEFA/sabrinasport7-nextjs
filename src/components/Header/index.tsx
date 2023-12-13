@@ -2,15 +2,18 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import MenuAccountHeader from "../Menus/MenuAccountHeader";
+import SheetMenuMobile from "../Menus/SheetMenuMobile";
+
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { ChevronDown, Menu, ShoppingCart, UserCircle } from "lucide-react";
+import { ShoppingCart, UserCircle } from "lucide-react";
 
 type Props = {};
 
 export default function Header({}: Props) {
   return (
-    <header className="bg-white">
+    <header className="bg-white lg:text-base">
       <section className="p-4 lg:px-8 lg:py-6 flex justify-between items-center mb-4 lg:mb-0">
         <section className="flex items-center">
 
@@ -37,9 +40,9 @@ export default function Header({}: Props) {
             <Input
               type="text"
               placeholder="Buscar producto"
-              className="md:w-96 inline"
+              className="md:w-96 inline lg:text-base"
             />
-            <Button type="submit" className="inline">
+            <Button type="submit" className="inline lg:text-base">
               Buscar
             </Button>
           </section>
@@ -48,12 +51,13 @@ export default function Header({}: Props) {
         <section className="flex items-center">
           {/* User Account */}
           <section className="mr-4 hidden lg:flex items-center">
-            <UserCircle size={28} className="mr-1" />
             {/* <div className="font-medium text-base">Sign In</div> */}
+            {/* <UserCircle size={28} className="mr-1" />
             <div className="flex items-center">
               Cesar
               <ChevronDown size={16}/>
-            </div>
+            </div> */}
+            <MenuAccountHeader />
           </section>
 
           {/* Cart */}
@@ -66,8 +70,10 @@ export default function Header({}: Props) {
             </div>
             <section className="text-gray-500 text-xs">$55,30</section>
           </section>
-          {/* Burger */}
-          <Menu size={28} className="lg:hidden" />
+          {/* Burger mobile */}
+          <div className="lg:hidden">
+            <SheetMenuMobile />
+          </div>
         </section>
       </section>
 
