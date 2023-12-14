@@ -1,4 +1,3 @@
-import React from "react";
 import Link from "next/link";
 
 import {
@@ -13,9 +12,12 @@ import {
 import { Separator } from "@/components/ui/separator";
 import ProductCard from "@/components/ProductCard";
 
+import { getProducts } from "@/lib/api/products";
+
 type Props = {};
 
-export default function TiendaPage({}: Props) {
+export default async function TiendaPage({}: Props) {
+  const { products, totalPages } = await getProducts();
   return (
     <main className="p-4 lg:px-8 lg:py-12 lg:flex">
       {/* Siderbar Section */}
@@ -83,13 +85,9 @@ export default function TiendaPage({}: Props) {
 
       {/* Product list */}
       <section className="lg:mx-auto xl:ml-7 2xl:mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-12 2xl:gap-16">
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {products.map((product) => (
+          <ProductCard key={product.id} data={product}/>
+        ))}
       </section>
     </main>
   );

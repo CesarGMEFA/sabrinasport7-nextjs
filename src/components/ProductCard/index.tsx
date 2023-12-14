@@ -14,29 +14,36 @@ import { Button } from "../ui/button";
 
 import { ShoppingCart } from "lucide-react";
 
-type Props = {};
+import { Product } from "@/lib/interfaces/Product.interface";
 
-export default function ProductCard({}: Props) {
+type Props = {
+  data: Product
+};
+
+export default function ProductCard({ data }: Props) {
+  console.log('products', data);
+
   return (
     <Card className="w-64 md:w-60 lg:w-56 p-3 mb-8 mx-auto">
-      <CardHeader className="p-0">
+      <CardHeader className="p-0 w-60 md:w-56 lg:w-52" >
         <Image
-          src="/products/top_naranja_1.jpg"
-          alt="producto"
+          src={data.images[0]?.src}
+          alt={data.name}
           width={256}
           height={300}
+          objectFit="cover" // Agrega esta línea para mantener la imagen fija en los valores de width y height
         />
         <CardTitle className="text-lg">
           <Link
             href="/producto/id"
             className="block text-ellipsis overflow-hidden whitespace-nowrap hover:text-purple-700 hover:underline focus:text-purple-700 focus:underline active:text-purple-800 active:underline"
           >
-            Top Naranja - para damas tall S, M y L
+            {data.name}
           </Link>
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0 pb-2">
-        <p>$25.00</p>
+        <p>${data.price}</p>
       </CardContent>
       <CardFooter className="p-0">
         <Button className="w-full">
