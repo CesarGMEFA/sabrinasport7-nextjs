@@ -25,14 +25,17 @@ export default function ProductCard({ data }: Props) {
 
   return (
     <Card className="w-64 md:w-60 lg:w-56 p-3 mb-8 mx-auto">
-      <CardHeader className="p-0 w-60 md:w-56 lg:w-52" >
-        <Image
-          src={data.images[0]?.src}
-          alt={data.name}
-          width={256}
-          height={300}
-          objectFit="cover" // Agrega esta línea para mantener la imagen fija en los valores de width y height
-        />
+      <CardHeader className="p-0">
+        <div className="w-60 md:w-56 lg:w-52 h-60 md:h-56 lg:h-52 flex items-center">
+          <Image
+            src={data.images[0]?.src}
+            alt={data.name}
+            width={256}
+            height={300}
+            objectFit="cover"
+            className="w-full h-full"
+          />
+        </div>
         <CardTitle className="text-lg">
           <Link
             href="/producto/id"
