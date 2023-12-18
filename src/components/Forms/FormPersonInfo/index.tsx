@@ -73,7 +73,6 @@ export default function FormPersonInfo() {
               <FormControl>
                 <Input
                   placeholder="escribe tu nombre aqui"
-                  defaultValue={"Alex"}
                   {...field}
                 />
               </FormControl>
@@ -91,7 +90,6 @@ export default function FormPersonInfo() {
               <FormControl>
                 <Input
                   placeholder="escribe tu apellido aqui"
-                  defaultValue={"Doe"}
                   {...field}
                 />
               </FormControl>
@@ -110,7 +108,6 @@ export default function FormPersonInfo() {
               <FormControl>
                 <Input
                   placeholder="ejemplo@mail.com"
-                  defaultValue={"cesa@outlook.com"}
                   {...field}
                 />
               </FormControl>
