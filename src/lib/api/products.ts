@@ -41,3 +41,19 @@ export async function getProducts(page = 1, per_page = 5) {
         totalPages,
     };
 }
+
+export async function getProduct(id: number) {
+    const url = new URL(`/wp-json/wc/v3/products/${id}`, WOO_URL);
+    url.searchParams.append('consumer_key', CK ?? '');
+    url.searchParams.append('consumer_secret', CS ?? '');
+
+    const response = await fetch(url.toString());
+
+    if (!response.ok) {
+        throw new Error("No data received from API");
+    }
+
+    const product: Product = await response.json();
+
+    return product;
+}

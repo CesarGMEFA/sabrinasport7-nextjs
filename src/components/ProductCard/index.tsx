@@ -21,7 +21,7 @@ type Props = {
 };
 
 export default function ProductCard({ data }: Props) {
-  console.log('products', data);
+  // console.log('products', data);
 
   return (
     <Card className="w-64 md:w-60 lg:w-56 p-3 mb-8 mx-auto">
@@ -38,7 +38,7 @@ export default function ProductCard({ data }: Props) {
         </div>
         <CardTitle className="text-lg">
           <Link
-            href="/producto/id"
+            href={`/productos/${data.id}`}
             className="block text-ellipsis overflow-hidden whitespace-nowrap hover:text-purple-700 hover:underline focus:text-purple-700 focus:underline active:text-purple-800 active:underline"
           >
             {data.name}
