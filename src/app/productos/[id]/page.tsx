@@ -46,6 +46,19 @@ export default function ProductPage({ params }: Props) {
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
 
+  let message = `Hola {site_name}, me interesa saber más acerca de:\n`;
+message += `- {product_name}\n`;
+message += `- Precio: {product_price}\n`;
+message += `- URL: {product_url}\n`;
+message += `- SKU: {product_sku}\n`;
+
+// for (const [taxonomy, selected_term] of Object.entries(selected_attributes)) {
+//   message += `- ${taxonomy}: ${selected_term}\n`;
+// }
+
+const url_encoded_message = encodeURIComponent(message);
+const whatsapp_url = `https://wa.me/573053503583?text=${url_encoded_message}`;
+
   const atributos = {
     id: 2,
     name: "Color",
@@ -282,7 +295,7 @@ export default function ProductPage({ params }: Props) {
 
           {/* WhatsApp Button */}
           <Link
-            href="#"
+            href={whatsapp_url}
             className="w-full bg-whatsapp flex flex-row items-center justify-center text-white font-bold text-lg rounded-xl py-3 px-6 hover:bg-green-700"
           >
             <WhatsAppIcon />
