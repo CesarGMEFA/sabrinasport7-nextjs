@@ -24,9 +24,9 @@ export default function ProductCard({ data }: Props) {
   // console.log('products', data);
 
   return (
-    <Card className="w-64 md:w-60 lg:w-56 p-3 mb-8 mx-auto">
+    <Card className="w-64 md:w-60 lg:w-56 p-3 mb-8 mx-auto 2xl:h-[340px]">
       <CardHeader className="p-0">
-        <div className="w-60 md:w-56 lg:w-52 h-60 md:h-56 lg:h-52 flex items-center">
+        <div className="w-full h-60 md:h-56 lg:h-52 flex justify-center items-center">
           <Image
             src={data.images[0]?.src}
             alt={data.name}
