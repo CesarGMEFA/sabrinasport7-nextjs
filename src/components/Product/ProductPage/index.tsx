@@ -12,6 +12,8 @@ import { Attributes, Product } from "@/lib/interfaces/Product.interface";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, Controller } from "react-hook-form";
 import * as z from "zod";
+import ProductPageImage from "./ProductPageImage";
+import CarouselThumbs from "./CarouselThumbs";
 
 type Props = {
   product: Product;
@@ -27,6 +29,7 @@ export default function ProductPageComponent({ product }: Props) {
   ]);
   const [activeImg, setActiveImage] = useState(images[0]);
   const [amount, setAmount] = useState(1);
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   let message = `Hola sabrinasport7, me interesa saber más acerca de:\n`;
   message += `- ${product.name}\n`;
@@ -76,8 +79,10 @@ export default function ProductPageComponent({ product }: Props) {
     <section className="max-w-7xl mx-auto p-8">
       <section className="flex flex-col lg:justify-between lg:flex-row lg:gap-16 lg:items-center">
         {/* Image Gallery */}
-        <div className="flex flex-col gap-6 lg:w-2/4">
-          <div className="flex justify-center">
+        <div className="flex flex-col gap-4 lg:w-2/4">
+          <ProductPageImage gallery={product.images} thumbsSwiper={thumbsSwiper} />
+          <CarouselThumbs gallery={product.images} setThumbsSwiper={setThumbsSwiper} />
+          {/* <div className="flex justify-center">
             <Image
               src={activeImg}
               alt=""
@@ -116,7 +121,7 @@ export default function ProductPageComponent({ product }: Props) {
                 </div>
               </Fragment>
             ))}
-          </div>
+          </div> */}
         </div>
 
         {/* Product Info */}

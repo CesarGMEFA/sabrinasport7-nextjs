@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.swiper-button-next, .swiper-button-prev {
+  color: red !important;
+  --swiper-navigation-size: 25px;
+}
 
 @layer base {
   :root {
