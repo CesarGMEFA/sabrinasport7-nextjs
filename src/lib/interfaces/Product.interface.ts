@@ -58,7 +58,7 @@ export interface Product {
   categories: Category[];
   tags: any[];
   images: Image[];
-  attributes: any[];
+  attributes: Attributes[];
   default_attributes: any[];
   variations: any[];
   grouped_products: any[];
@@ -88,6 +88,15 @@ export interface Image {
   src: string;
   name: string;
   alt: string;
+}
+
+export interface Attributes {
+  id: number,
+  name: string,
+  position: number,
+  visible: boolean,
+  variation: boolean,
+  options: string[]
 }
 
 export interface Links {

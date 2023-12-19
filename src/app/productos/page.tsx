@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "@/components/Product/ProductCard";
 
 import { getProducts } from "@/lib/api/products";
 

@@ -5,14 +5,14 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tag } from "lucide-react";
 import { cn } from "@/lib/utils";
-import ProductOptions from "@/components/ProductOptions";
+import ProductOptions from "@/components/Product/ProductOptions";
 
 type Props = {};
 
 const sizes = ["S", "M", "L", "XL"];
 const colors = ["#ff0000", "#00ff00", "#0000ff", "#ffff00"];
 
-export default function ProductPage({}: Props) {
+export default function ProductPageLegacy({}: Props) {
   const [mainImage, setMainImage] = useState("/products/top_naranja_1.jpg");
   const thumbnails = [
     "/products/top_naranja_2.jpg",
