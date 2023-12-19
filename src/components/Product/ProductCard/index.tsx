@@ -21,10 +21,9 @@ type Props = {
 };
 
 export default function ProductCard({ data }: Props) {
-  // console.log('products', data);
 
   return (
-    <Card className="w-64 md:w-60 lg:w-56 p-3 mb-8 mx-auto 2xl:h-[340px]">
+    <Card className=" w-[92%] sm:w-64 md:w-60 lg:w-56 p-3 mb-8 mx-auto 2xl:h-[340px]">
       <CardHeader className="p-0">
         <div className="w-full h-60 md:h-56 lg:h-52 flex justify-center items-center">
           <Image
@@ -32,11 +31,10 @@ export default function ProductCard({ data }: Props) {
             alt={data.name}
             width={256}
             height={300}
-            objectFit="cover"
-            className="w-full h-full"
+            className="w-full h-full object-contain"
           />
         </div>
-        <CardTitle className="text-lg">
+        <CardTitle className="text-base sm:text-lg">
           <Link
             href={`/productos/${data.id}`}
             className="block text-ellipsis overflow-hidden whitespace-nowrap hover:text-purple-700 hover:underline focus:text-purple-700 focus:underline active:text-purple-800 active:underline"
