@@ -8,6 +8,7 @@ import SheetMenuMobile from "../Menus/SheetMenuMobile";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { ShoppingCart, UserCircle } from "lucide-react";
+import HeaderCart from "./HeaderCart";
 
 type Props = {};
 
@@ -61,15 +62,7 @@ export default function Header({}: Props) {
           </section>
 
           {/* Cart */}
-          <section className="mr-4 flex items-center">
-            <div className="mr-3 relative">
-              <ShoppingCart size={28} />
-              <div className="w-5 py-0.5 absolute bottom-3 left-4 font-bold flex justify-center items-center rounded-full bg-red-600 text-white text-xs">
-                9
-              </div>
-            </div>
-            <section className="text-gray-500 text-xs">$55,30</section>
-          </section>
+          <HeaderCart />
           {/* Burger mobile */}
           <div className="lg:hidden">
             <SheetMenuMobile />

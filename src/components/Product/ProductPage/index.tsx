@@ -14,22 +14,18 @@ import { useForm, Controller } from "react-hook-form";
 import * as z from "zod";
 import ProductPageImage from "./ProductPageImage";
 import CarouselThumbs from "./CarouselThumbs";
+import { CartStore, useCartStore } from "@/lib/store/cart";
 
 type Props = {
   product: Product;
 };
 
 export default function ProductPageComponent({ product }: Props) {
-  const [images, setImages] = useState([
-    "https://sabrinasport7.com/wp-content/uploads/2023/12/104273_6_738x.progressive.webp",
-    "https://sabrinasport7.com/wp-content/uploads/2023/11/104153_2_738x.progressive.webp",
-    "https://sabrinasport7.com/wp-content/uploads/2023/11/104153_4_738x.progressive.webp",
-    "https://sabrinasport7.com/wp-content/uploads/2023/11/104153_3_738x.progressive.webp",
-    "https://sabrinasport7.com/wp-content/uploads/2023/11/104153_6_738x.progressive.webp",
-  ]);
-  const [activeImg, setActiveImage] = useState(images[0]);
   const [amount, setAmount] = useState(1);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+  const { add, cart } = useCartStore() as CartStore;
+  // const { add } = useCartContext()
 
   let message = `Hola sabrinasport7, me interesa saber más acerca de:\n`;
   message += `- ${product.name}\n`;
@@ -61,10 +57,14 @@ export default function ProductPageComponent({ product }: Props) {
   });
 
   const onSubmit = (data: any) => {
+    // console.log("data de antes => ", data)
     data.id = product.id;
     data.name = product.name;
+    data.item_price = Number(product.price);
+    data.link = product.permalink;
     data.amount = amount;
-    console.log(data);
+    add(data)
+    setAmount(1)
   };
 
   const attributeColor = product.attributes.find(
@@ -75,53 +75,22 @@ export default function ProductPageComponent({ product }: Props) {
     (attribute) => attribute.name === "Talla"
   );
 
+  useEffect(() => {
+    console.log("cart => ", cart)
+  }, [cart]);
   return (
     <section className="max-w-7xl mx-auto p-8">
       <section className="flex flex-col lg:justify-between lg:flex-row lg:gap-16 lg:items-center">
         {/* Image Gallery */}
         <div className="flex flex-col gap-4 lg:w-2/4">
-          <ProductPageImage gallery={product.images} thumbsSwiper={thumbsSwiper} />
-          <CarouselThumbs gallery={product.images} setThumbsSwiper={setThumbsSwiper} />
-          {/* <div className="flex justify-center">
-            <Image
-              src={activeImg}
-              alt=""
-              width={300}
-              height={300}
-              className="block sm:hidden aspect-square object-cover rounded-xl"
-            />
-            <Image
-              src={activeImg}
-              alt=""
-              width={500}
-              height={500}
-              className="hidden sm:block aspect-square object-cover rounded-xl"
-            />
-          </div>
-          <div className="flex flex-row flex-wrap mx-auto">
-            {images.map((image) => (
-              <Fragment key={uuid()}>
-                <div className="relative w-16 h-16 sm:hidden">
-                  <Image
-                    src={image}
-                    alt=""
-                    fill
-                    className="m-0.5 object-cover rounded-md cursor-pointer"
-                    onClick={() => setActiveImage(image)}
-                  />
-                </div>
-                <div className="relative w-24 h-24 hidden sm:block">
-                  <Image
-                    src={image}
-                    alt=""
-                    fill
-                    className="m-0.5 object-cover rounded-md cursor-pointer"
-                    onClick={() => setActiveImage(image)}
-                  />
-                </div>
-              </Fragment>
-            ))}
-          </div> */}
+          <ProductPageImage
+            gallery={product.images}
+            thumbsSwiper={thumbsSwiper}
+          />
+          <CarouselThumbs
+            gallery={product.images}
+            setThumbsSwiper={setThumbsSwiper}
+          />
         </div>
 
         {/* Product Info */}
@@ -138,8 +107,14 @@ export default function ProductPageComponent({ product }: Props) {
           <h6 className="my-2 text-3xl font-semibold">${product.price}</h6>
 
           <section>
-            <p><span className="font-bold">SKU:</span> {product.sku ? product.sku : "N/A"}</p>
-            <p className=""><span className="font-bold">Disponibilidad:</span> {product.stock_quantity} items</p>
+            <p>
+              <span className="font-bold">SKU:</span>{" "}
+              {product.sku ? product.sku : "N/A"}
+            </p>
+            <p className="">
+              <span className="font-bold">Disponibilidad:</span>{" "}
+              {product.stock_quantity} items
+            </p>
           </section>
 
           {/* Options */}

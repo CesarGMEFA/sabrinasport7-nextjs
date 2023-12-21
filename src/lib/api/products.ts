@@ -35,10 +35,12 @@ export async function getProducts(page = 1, per_page = 5) {
 
     const products: Product[] = await response.json();
     const totalPages = response.headers.get("x-wp-totalpages");
+    const totalProducts = response.headers.get("x-wp-total");
 
     return {
         products,
         totalPages,
+        totalProducts
     };
 }
 
