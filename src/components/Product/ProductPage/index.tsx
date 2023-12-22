@@ -1,20 +1,19 @@
 "use client";
-import { useState, useEffect, Fragment } from "react";
-import Image from "next/image";
+import { useState } from "react";
 import Link from "next/link";
+import { useForm, Controller } from "react-hook-form";
 import { v4 as uuid } from "uuid";
+import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import ReactHtmlParser from "react-html-parser";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { colorMap } from "@/lib/colorMap";
-import { Attributes, Product } from "@/lib/interfaces/Product.interface";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, Controller } from "react-hook-form";
+import { Product } from "@/lib/interfaces/Product.interface";
+import { CartStore } from "@/lib/interfaces/CartStore.interce";
 import * as z from "zod";
 import ProductPageImage from "./ProductPageImage";
 import CarouselThumbs from "./CarouselThumbs";
-import { CartStore, useCartStore } from "@/lib/store/cart";
+import { useCartStore } from "@/lib/store/cart";
 
 type Props = {
   product: Product;
@@ -60,6 +59,7 @@ export default function ProductPageComponent({ product }: Props) {
     // console.log("data de antes => ", data)
     data.id = product.id;
     data.name = product.name;
+    data.imgSrc = product.images[0].src;
     data.item_price = Number(product.price);
     data.link = product.permalink;
     data.amount = amount;
@@ -75,9 +75,6 @@ export default function ProductPageComponent({ product }: Props) {
     (attribute) => attribute.name === "Talla"
   );
 
-  useEffect(() => {
-    console.log("cart => ", cart)
-  }, [cart]);
   return (
     <section className="max-w-7xl mx-auto p-8">
       <section className="flex flex-col lg:justify-between lg:flex-row lg:gap-16 lg:items-center">

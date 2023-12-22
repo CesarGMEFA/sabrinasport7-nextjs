@@ -1,16 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { cartItem } from "@/lib/interfaces/CartItem.interface";
+import { CartStore } from "../interfaces/CartStore.interce";
 
-export interface CartStore {
-  cart: cartItem[];
-  amount: () => number;
-  add: (product: cartItem) => void;
-  addAll: (products: cartItem[]) => void;
-  remove: (idProduct: number) => void;
-  removeAll: () => void;
-  totalPrice: () => number;
-};
 
 export const useCartStore = create(
   persist(
@@ -54,21 +46,17 @@ export const useCartStore = create(
           cart.push({ ...product, price: product.amount * product.item_price });
         }
         set({ cart: [...cart] });
-        // localStorage.setItem("cart", JSON.stringify(cart));
-        console.log("add => ", cart);
       },
       addAll: (products: cartItem[]) => {
         const { cart } = get() as CartStore;
         const updatedCart = [...products];
         set({ cart: updatedCart });
-        // localStorage.setItem("cart", JSON.stringify(cart));
       },
       remove: (idProduct: number) => {
         const { cart } = get() as CartStore;
         const updatedCart = removeCart(idProduct, cart);
         console.log("remove => ", cart);
         set({ cart: updatedCart });
-        // localStorage.setItem("cart", JSON.stringify(cart));
       },
       removeAll: () => set({ cart: [] }),
     }),
@@ -79,11 +67,6 @@ export const useCartStore = create(
   )
 );
 
-// useCartStore.subscribe(
-//   (state: CartStore) => {
-//     useCartStore.setState(state);
-//   }
-// );
 function updateCart(product: cartItem, cart: cartItem[]): cartItem[] {
   const productOnCart = cart.find((item) => item.id === product.id);
 

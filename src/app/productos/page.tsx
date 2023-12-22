@@ -23,7 +23,7 @@ export default async function TiendaPage({}: Props) {
 
   return (
     <main className="p-4 lg:px-8 lg:py-12 lg:flex lg:flex-col">
-      <section className="flex flex-row">
+      <section className="flex flex-col lg:flex-row">
         {/* Siderbar Section */}
         <section className="h-max flex items-center justify-start flex-col lg:bg-white lg:w-72 lg:py-12">
           {/* Select Mobile */}
