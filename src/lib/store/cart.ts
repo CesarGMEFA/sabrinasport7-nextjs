@@ -1,8 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { cartItem } from "@/lib/interfaces/CartItem.interface";
-import { CartStore } from "../interfaces/CartStore.interce";
-
+import { CartStore } from "../interfaces/CartStore.interface";
 
 export const useCartStore = create(
   persist(
@@ -28,19 +27,18 @@ export const useCartStore = create(
         const { cart } = get() as CartStore;
 
         // Busca si el producto ya existe en el carrito
-        const existingProductIndex = cart.findIndex(
+        const existingProduct = cart.find(
           (item) =>
             item.id === product.id &&
             item.size === product.size &&
             item.color === product.color
         );
 
-        if (existingProductIndex >= 0) {
+        if (existingProduct) {
           // Si el producto ya existe, incrementa la cantidad
-          cart[existingProductIndex].amount += product.amount;
-          cart[existingProductIndex].price =
-            cart[existingProductIndex].amount *
-            cart[existingProductIndex].item_price;
+          existingProduct.amount += 1;
+          existingProduct.price =
+            existingProduct.amount * existingProduct.item_price;
         } else {
           // Si el producto no existe, añádelo al carrito
           cart.push({ ...product, price: product.amount * product.item_price });
@@ -48,13 +46,12 @@ export const useCartStore = create(
         set({ cart: [...cart] });
       },
       addAll: (products: cartItem[]) => {
-        const { cart } = get() as CartStore;
         const updatedCart = [...products];
         set({ cart: updatedCart });
       },
-      remove: (idProduct: number) => {
+      remove: (item: cartItem) => {
         const { cart } = get() as CartStore;
-        const updatedCart = removeCart(idProduct, cart);
+        const updatedCart = removeCart(item, cart);
         console.log("remove => ", cart);
         set({ cart: updatedCart });
       },
@@ -67,22 +64,11 @@ export const useCartStore = create(
   )
 );
 
-function updateCart(product: cartItem, cart: cartItem[]): cartItem[] {
-  const productOnCart = cart.find((item) => item.id === product.id);
-
-  if (!productOnCart) {
-    cart.push({ ...product, amount: 1, price: product.price * product.amount }); // Agrega el producto al carrito con cantidad 1
-  } else {
-    productOnCart.amount += 1; // Incrementa la cantidad del producto existente
-  }
-
-  return cart;
-}
-
-function removeCart(idProduct: number, cart: cartItem[]): cartItem[] {
+function removeCart(p: cartItem, cart: cartItem[]): cartItem[] {
   return cart
     .map((item) => {
-      if (item.id === idProduct) return { ...item, amount: item.amount - 1 };
+      if (item.id === p.id && item.color === p.color && item.size === p.size)
+        return { ...item, amount: item.amount - 1, price: item.price - item.item_price };
       return item;
     })
     .filter((item) => {

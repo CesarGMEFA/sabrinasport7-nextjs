@@ -4,7 +4,7 @@ import Link from "next/link";
 import clsx from "clsx";
 import { Separator } from "@/components/ui/separator";
 import { cartItem } from "@/lib/interfaces/CartItem.interface";
-import { CartStore } from "@/lib/interfaces/CartStore.interce";
+import { CartStore } from "@/lib/interfaces/CartStore.interface";
 import { useCartStore } from "@/lib/store/cart";
 import { useStore } from "@/lib/store/useStore";
 
@@ -63,7 +63,7 @@ export default function CartProductCard({ item }: Props) {
                 type="button"
                 disabled={item.amount === 0}
                 className="bg-gray-200 py-1 px-2 rounded-lg text-red-800 text-xs disabled:opacity-50 disabled:cursor-not-allowed"
-                onClick={() => remove(item.id)}
+                onClick={() => remove(item)}
               >
                 -
               </button>

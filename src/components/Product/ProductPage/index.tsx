@@ -9,7 +9,7 @@ import ReactHtmlParser from "react-html-parser";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 import { colorMap } from "@/lib/colorMap";
 import { Product } from "@/lib/interfaces/Product.interface";
-import { CartStore } from "@/lib/interfaces/CartStore.interce";
+import { CartStore } from "@/lib/interfaces/CartStore.interface";
 import * as z from "zod";
 import ProductPageImage from "./ProductPageImage";
 import CarouselThumbs from "./CarouselThumbs";
