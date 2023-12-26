@@ -23,7 +23,7 @@ type Props = {
 export default function ProductCard({ data }: Props) {
 
   return (
-    <Card className=" w-[92%] sm:w-64 md:w-60 lg:w-56 p-3 mb-8 mx-auto 2xl:h-[340px]">
+    <Card className="w-[92%] h-min sm:w-64 md:w-60 lg:w-56 p-3 mx-auto">
       <CardHeader className="p-0">
         <div className="w-full h-60 md:h-56 lg:h-52 flex justify-center items-center">
           <Image

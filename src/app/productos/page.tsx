@@ -30,7 +30,7 @@ export default async function TiendaPage({ searchParams }: Props) {
 
         {/* Product list */}
         <Suspense key={search + currentPage} fallback={<p>Loading...</p>}>
-          <section className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-12 2xl:gap-16">
+          <section className="lg:ml-4 grid gap-4 first-letter:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:gap-6 min-[1745px]:grid-cols-6 ">
             {products.map((product) => (
               <ProductCard key={product.id} data={product} />
             ))}

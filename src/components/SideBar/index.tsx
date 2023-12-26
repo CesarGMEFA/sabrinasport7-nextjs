@@ -1,5 +1,4 @@
 "use client";
-import { useEffect, useState } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -14,23 +13,37 @@ import {
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 
+import { categories } from "./categories";
+import clsx from "clsx";
+
 type Props = {};
 
 export default function SiderBar({}: Props) {
-//   const [selectedValue, setSelectedValue] = useState("");
+  //   const [selectedValue, setSelectedValue] = useState("");
   const searchParams = useSearchParams();
   const pathname = usePathname();
-    const router = useRouter();
+  const router = useRouter();
+  const categoryId = searchParams.get("category");
 
   const handleChange = (categoryId: string) => {
     const params = new URLSearchParams(searchParams);
     params.set("category", categoryId);
-    console.log(`${pathname}?${params.toString()}`)
 
     if (params.get("page")) {
-      params.delete("page")
+      params.delete("page");
     }
-    // return `${pathname}?${params.toString()}`
+
+    router.push(`${pathname}?${params.toString()}`);
+  };
+
+  const handleChangeDesktop = (categoryId: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set("category", categoryId);
+
+    if (params.get("page")) {
+      params.delete("page");
+    }
+
     router.push(`${pathname}?${params.toString()}`);
   };
 
@@ -45,11 +58,11 @@ export default function SiderBar({}: Props) {
           <SelectContent>
             <SelectGroup>
               {/* <SelectLabel>Norte America</SelectLabel> */}
-              <SelectItem value="42">Babal&uacute;</SelectItem>
-              <SelectItem value="75">Bonlife</SelectItem>
-              <SelectItem value="toys">Juguetes</SelectItem>
-              <SelectItem value="suplementos">Suplementos</SelectItem>
-              <SelectItem value="escolar">Escolar</SelectItem>
+              {categories.map((category) => (
+                <SelectItem key={category.id} value={category.id}>
+                  {category.category}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -62,38 +75,24 @@ export default function SiderBar({}: Props) {
       </h2>
       <Separator className="my-5 w-4/5 hidden lg:block" />
       <nav className="hidden lg:flex lg:flex-col lg:space-y-4">
-        <Link
-          href={"/"}
-          className="w-64 pl-3 py-2 bg-red-600 text-white font-medium hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white"
-        >
-          Babal&uacute;
-        </Link>
-        <Link
-          href={"/"}
-          className="w-64 pl-3 py-2 font-medium hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white"
-        >
-          Tsunami
-        </Link>
-        <Link
-          href={"/"}
-          className="w-64 pl-3 py-2 font-medium hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white"
-        >
-          Suplementos
-        </Link>
-        <Link
-          href={"/"}
-          className="w-64 pl-3 py-2 font-medium hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white"
-        >
-          Juguetes
-        </Link>
-        <Link
-          href={"/"}
-          className="w-64 pl-3 py-2 font-medium hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white"
-        >
-          Escolar
-        </Link>
+        {categories.map((category) => (
+          <button
+            key={category.id}
+            className={clsx(
+              "w-64 pl-3 py-2 font-medium text-left hover:bg-red-400 hover:text-white",
+              {
+                "bg-red-600 text-white":
+                  categoryId === category.id,
+              }
+            )}
+            onClick={() => {
+              handleChangeDesktop(category.id);
+            }}
+          >
+            {category.category}
+          </button>
+        ))}
       </nav>
     </section>
   );
 }
-
