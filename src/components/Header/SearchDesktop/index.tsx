@@ -21,6 +21,10 @@ export default function SearchDesktop({}: Props) {
       params.delete("search");
     }
 
+    if (params.get("page")) {
+      params.delete("page")
+    }
+
     replace(`${pathname}?${params.toString()}`);
   };
 

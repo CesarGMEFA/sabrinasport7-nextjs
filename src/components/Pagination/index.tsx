@@ -43,9 +43,9 @@ const [ untilProducts, setUntilProducts ] = useState<number>(actualProducts);
       <div className="mx-auto flex flex-col items-center sm:flex-row sm:flex-nowrap sm:flex-1 sm:items-center sm:justify-between">
         <div className="mb-2">
           <p className="text-sm text-gray-700">
-            Showing <span className="font-medium">{sinceProducts}</span> to{" "}
-            <span className="font-medium">{untilProducts}</span> of{" "}
-            <span className="font-medium">{totalProducts}</span> results
+            Mostrando <span className="font-medium">{sinceProducts}</span> hasta{" "}
+            <span className="font-medium">{untilProducts}</span> de{" "}
+            <span className="font-medium">{totalProducts}</span> resultados
           </p>
         </div>
 

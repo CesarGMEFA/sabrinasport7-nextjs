@@ -12,7 +12,7 @@ import { Product } from "@/lib/interfaces/Product.interface";
  *
  * @returns {Promise<Object>} A promise that resolves to an object containing an array of products and the total number of pages.
  */
-export async function getProducts(page = 1, search = "") {
+export async function getProducts(page = 1, search = "", category = "") {
   const per_page = 20;
   if (typeof page !== "number" || page < 1) {
     throw new Error("Page must be a positive integer");
@@ -26,6 +26,10 @@ export async function getProducts(page = 1, search = "") {
 
   if (search !== "") {
     url.searchParams.append("search", search);
+  }
+
+  if (category !== "") {
+    url.searchParams.append("category", category);
   }
 
   const response = await fetch(url.toString());
