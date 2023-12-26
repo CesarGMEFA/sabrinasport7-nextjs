@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -23,9 +22,16 @@ type Props = {
 export default function ProductCard({ data }: Props) {
 
   return (
-    <Card className="w-[92%] h-min sm:w-64 md:w-60 lg:w-56 p-3 mx-auto">
+    <Card className="w-[92%] h-min sm:w-64 md:w-60 lg:w-56 p-3 mx-auto shadow-md">
       <CardHeader className="p-0">
-        <div className="w-full h-60 md:h-56 lg:h-52 flex justify-center items-center">
+        <div className="w-full h-40 min-[480px]:h-60 md:h-56 lg:h-52 flex justify-center items-center">
+        {/* <Image
+            src={data.images[0]?.src}
+            alt={data.name}
+            width={216}
+            height={260}
+            className="w-full h-full object-contain"
+          /> */}
           <Image
             src={data.images[0]?.src}
             alt={data.name}
@@ -44,7 +50,7 @@ export default function ProductCard({ data }: Props) {
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0 pb-2">
-        <p>${data.price}</p>
+        <p>${data.regular_price}</p>
       </CardContent>
       {/* <CardFooter className="p-0">
         <Button className="w-full">
