@@ -12,50 +12,51 @@ import { Product } from "@/lib/interfaces/Product.interface";
  *
  * @returns {Promise<Object>} A promise that resolves to an object containing an array of products and the total number of pages.
  */
-export async function getProducts(page = 1, per_page = 5) {
-    if (typeof page !== "number" || page < 1) {
-        throw new Error("Page must be a positive integer");
-    }
+export async function getProducts(page = 1, search = "") {
+  const per_page = 20;
+  if (typeof page !== "number" || page < 1) {
+    throw new Error("Page must be a positive integer");
+  }
 
-    if (typeof per_page !== "number" || per_page < 1) {
-        throw new Error("Per_page must be a positive integer");
-    }
+  const url = new URL(`/wp-json/wc/v3/products`, WOO_URL);
+  url.searchParams.append("consumer_key", CK ?? "");
+  url.searchParams.append("consumer_secret", CS ?? "");
+  url.searchParams.append("page", page.toString());
+  url.searchParams.append("per_page", per_page.toString());
 
-    const url = new URL(`/wp-json/wc/v3/products`, WOO_URL);
-    url.searchParams.append('consumer_key', CK ?? '');
-    url.searchParams.append('consumer_secret', CS ?? '');
-    url.searchParams.append('page', page.toString());
-    url.searchParams.append('per_page', per_page.toString());
+  if (search !== "") {
+    url.searchParams.append("search", search);
+  }
 
-    const response = await fetch(url.toString());
+  const response = await fetch(url.toString());
 
-    if (!response.ok) {
-        throw new Error("No data received from API");
-    }
+  if (!response.ok) {
+    throw new Error("No data received from API");
+  }
 
-    const products: Product[] = await response.json();
-    const totalPages = response.headers.get("x-wp-totalpages");
-    const totalProducts = response.headers.get("x-wp-total");
+  const products: Product[] = await response.json();
+  const totalPages = response.headers.get("x-wp-totalpages");
+  const totalProducts = response.headers.get("x-wp-total");
 
-    return {
-        products,
-        totalPages,
-        totalProducts
-    };
+  return {
+    products,
+    totalPages,
+    totalProducts,
+  };
 }
 
 export async function getProduct(id: number) {
-    const url = new URL(`/wp-json/wc/v3/products/${id}`, WOO_URL);
-    url.searchParams.append('consumer_key', CK ?? '');
-    url.searchParams.append('consumer_secret', CS ?? '');
+  const url = new URL(`/wp-json/wc/v3/products/${id}`, WOO_URL);
+  url.searchParams.append("consumer_key", CK ?? "");
+  url.searchParams.append("consumer_secret", CS ?? "");
 
-    const response = await fetch(url.toString());
+  const response = await fetch(url.toString());
 
-    if (!response.ok) {
-        throw new Error("No data received from API");
-    }
+  if (!response.ok) {
+    throw new Error("No data received from API");
+  }
 
-    const product: Product = await response.json();
+  const product: Product = await response.json();
 
-    return product;
+  return product;
 }

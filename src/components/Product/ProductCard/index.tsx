@@ -46,11 +46,11 @@ export default function ProductCard({ data }: Props) {
       <CardContent className="p-0 pb-2">
         <p>${data.price}</p>
       </CardContent>
-      <CardFooter className="p-0">
+      {/* <CardFooter className="p-0">
         <Button className="w-full">
           Agregar <ShoppingCart />{" "}
         </Button>
-      </CardFooter>
+      </CardFooter> */}
     </Card>
   );
 }

@@ -52,8 +52,6 @@ export default function HeaderCart({}: Props) {
     setWhatsappUrl(whatsapp_url);
   }, [cart, totalPrice]);
 
-  console.log(cart);
-
   if (!cartStore) return <div></div>;
 
   return (

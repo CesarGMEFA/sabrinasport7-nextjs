@@ -9,6 +9,8 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { ShoppingCart, UserCircle } from "lucide-react";
 import HeaderCart from "./HeaderCart";
+import SearchMobile from "./SearchMobile";
+import SearchDesktop from "./SearchDesktop";
 
 type Props = {};
 
@@ -37,16 +39,7 @@ export default function Header({}: Props) {
           </Link>
 
           {/* Input Search Desktop & Tablet */}
-          <section className="ml-6 hidden sm:flex w-full max-w-lg items-center space-x-2">
-            <Input
-              type="text"
-              placeholder="Buscar producto"
-              className="md:w-96 inline lg:text-base"
-            />
-            <Button type="submit" className="inline lg:text-base">
-              Buscar
-            </Button>
-          </section>
+          <SearchDesktop />
         </section>
 
         <section className="flex items-center">
@@ -71,10 +64,7 @@ export default function Header({}: Props) {
       </section>
 
       {/* Input Search Mobile */}
-      <section className="px-4 pt-0 pb-4 lg:p-8 flex w-full mx-auto max-w-sm items-center space-x-2 sm:hidden">
-        <Input type="text" placeholder="Buscar producto" />
-        <Button type="submit">Buscar</Button>
-      </section>
+      <SearchMobile />
 
       <nav className="h-8 hidden bg-gray-50 lg:flex lg:justify-evenly lg:items-center font-medium border-red-600 border-b-2">
         <Link
