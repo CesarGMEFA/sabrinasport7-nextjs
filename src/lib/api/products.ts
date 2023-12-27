@@ -64,3 +64,19 @@ export async function getProduct(id: number) {
 
   return product;
 }
+
+export async function getProductVariation(productId: number, variationId: number) {
+  const url = new URL(`/wp-json/wc/v3/products/${productId}/variations/${variationId}`, WOO_URL);
+  url.searchParams.append("consumer_key", CK ?? "");
+  url.searchParams.append("consumer_secret", CS ?? "");
+
+  const response = await fetch(url.toString());
+
+  if (!response.ok) {
+    throw new Error("No data received from API");
+  }
+
+  const product: Product = await response.json();
+
+  return product;
+}
