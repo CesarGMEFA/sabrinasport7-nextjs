@@ -3,28 +3,31 @@ import { useState } from "react";
 import Link from "next/link";
 import { useForm, Controller } from "react-hook-form";
 import { v4 as uuid } from "uuid";
+import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import ReactHtmlParser from "react-html-parser";
+
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
+
 import { colorMap } from "@/lib/colorMap";
 import { Product } from "@/lib/interfaces/Product.interface";
 import { CartStore } from "@/lib/interfaces/CartStore.interface";
-import * as z from "zod";
+import { useCartStore } from "@/lib/store/cart";
+
 import ProductPageImage from "./ProductPageImage";
 import CarouselThumbs from "./CarouselThumbs";
-import { useCartStore } from "@/lib/store/cart";
 
 type Props = {
   product: Product;
+  variations: Product[];
 };
 
-export default function ProductPageComponent({ product }: Props) {
+export default function ProductPageComponent({ product, variations }: Props) {
   const [amount, setAmount] = useState(1);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
-  const { add, cart } = useCartStore() as CartStore;
-  // const { add } = useCartContext()
+  const { add } = useCartStore() as CartStore;
 
   let message = `Hola sabrinasport7, me interesa saber más acerca de:\n`;
   message += `- ${product.name}\n`;
@@ -63,8 +66,8 @@ export default function ProductPageComponent({ product }: Props) {
     data.item_price = Number(product.price);
     data.link = product.permalink;
     data.amount = amount;
-    add(data)
-    setAmount(1)
+    add(data);
+    setAmount(1);
   };
 
   const attributeColor = product.attributes.find(
@@ -74,7 +77,7 @@ export default function ProductPageComponent({ product }: Props) {
   const attributeSize = product.attributes.find(
     (attribute) => attribute.name === "Talla"
   );
-
+  console.log("thumbnail => ", thumbsSwiper)
   return (
     <section className="max-w-7xl mx-auto p-8">
       <section className="flex flex-col lg:justify-between lg:flex-row lg:gap-16 lg:items-center">
@@ -93,15 +96,45 @@ export default function ProductPageComponent({ product }: Props) {
         {/* Product Info */}
         <section className="mt-6 flex flex-col lg:self-start gap-2 lg:w-2/4">
           <div>
-            {/* <span className=" text-violet-600 font-semibold">
-                Special Sneaker
-              </span> */}
             <h1 className="text-xl sm:text-2xl font-bold">{product.name}</h1>
           </div>
           <div className="text-gray-700">
             {ReactHtmlParser(product.short_description)}
           </div>
-          <h6 className="my-2 text-3xl font-semibold">${product.price}</h6>
+          <div className="my-2 text-3xl font-semibold">
+            {product.variations[0] && (
+              <>
+                {variations[0].on_sale ? (
+                  <div className="flex items-center">
+                    <p className="line-through text-gray-600 mr-1">
+                      ${variations[0].regular_price}
+                    </p>
+                    <p className="text-red-600 font-bold">
+                      ${variations[0].sale_price}
+                    </p>
+                  </div>
+                ) : (
+                  <span>${variations[0].regular_price}</span>
+                )}
+              </>
+            )}
+            {!product.variations[0] && (
+              <>
+                {product.on_sale ? (
+                  <div className="flex items-center">
+                    <p className="line-through text-gray-600 mr-1">
+                      ${product.regular_price}
+                    </p>
+                    <p className="text-red-600 font-bold">
+                      ${product.sale_price}
+                    </p>
+                  </div>
+                ) : (
+                  <span className="holas">${product.regular_price}</span>
+                )}
+              </>
+            )}
+          </div>
 
           <section>
             <p>

@@ -4,9 +4,7 @@ import ProductCard from "@/components/Product/ProductCard";
 import Pagination from "@/components/Pagination";
 import SiderBar from "@/components/SideBar";
 
-import { Product } from "@/lib/interfaces/Product.interface";
-import { getProducts, getProductVariation } from "@/lib/api/products";
-import ProductCardVariation from "@/components/Product/ProductCardVariation";
+import { getProducts } from "@/lib/api/products";
 
 type Props = {
   searchParams: {
