@@ -20,6 +20,12 @@ type Props = {
 };
 
 export default function ProductCard({ data }: Props) {
+  const regex = /\d+,\d{2}/g;
+  const price_html = data?.price_html || "";
+
+  const prices = price_html.match(regex);
+  const price = prices?.[0] || "";
+  const sale_price = prices?.[1] || undefined;
 
   return (
     <Card className="w-[92%] h-min sm:w-64 md:w-60 lg:w-56 p-3 mx-auto shadow-md">
@@ -52,13 +58,13 @@ export default function ProductCard({ data }: Props) {
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0 pb-2">
-        {data?.on_sale ? (
+        {sale_price ? (
           <div className="flex items-center">
-            <p className="line-through text-gray-600 mr-1">${data.regular_price}</p>
-            <p className="text-red-600 font-bold">${data.sale_price}</p>
+            <p className="line-through text-gray-600 mr-1">${price}</p>
+            <p className="text-red-600 font-bold">${sale_price}</p>
           </div>
         ) : (
-          <p>${data?.regular_price}</p>
+          <p>${price}</p>
         )}
       </CardContent>
       {/* <CardFooter className="p-0">

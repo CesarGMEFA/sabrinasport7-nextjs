@@ -1,6 +1,7 @@
 import { WOO_URL, CK, CS } from "@/lib/api/config";
 import { Product } from "@/lib/interfaces/Product.interface";
 
+
 /**
  * Fetches a list of products from the API.
  *
@@ -65,8 +66,14 @@ export async function getProduct(id: number) {
   return product;
 }
 
-export async function getProductVariation(productId: number, variationId: number) {
-  const url = new URL(`/wp-json/wc/v3/products/${productId}/variations/${variationId}`, WOO_URL);
+export async function getProductVariation(
+  productId: number,
+  variationId: number
+) {
+  const url = new URL(
+    `/wp-json/wc/v3/products/${productId}/variations/${variationId}`,
+    WOO_URL
+  );
   url.searchParams.append("consumer_key", CK ?? "");
   url.searchParams.append("consumer_secret", CS ?? "");
 

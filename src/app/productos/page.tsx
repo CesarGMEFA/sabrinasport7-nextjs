@@ -37,13 +37,9 @@ export default async function TiendaPage({ searchParams }: Props) {
         {/* Product list */}
         <Suspense key={search + currentPage} fallback={<p>Loading...</p>}>
           <section className="lg:ml-4 grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 2xl:gap-6 min-[1745px]:grid-cols-6 ">
-            {products.map((product) => {
-              if (product.type === "variable") {
-                return <ProductCardVariation key={product.id} id={product.id} variationId={product.variations[0]} />
-              } else {
-                return <ProductCard key={product.id} data={product} />;
-              }
-            })}
+            {products.map((product) => (
+              <ProductCard key={product.id} data={product} />
+            ))}
           </section>
         </Suspense>
       </section>
