@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image";
 import { Swiper, SwiperSlide } from '@/lib/Swiper';
 
@@ -16,7 +17,7 @@ export default function CarouselThumbs({ gallery, setThumbsSwiper }: any) {
         {gallery?.map((item: any) => (
           <SwiperSlide
             key={`product-thumb-gallery-${item.id}`}
-            className="w-20 flex items-center justify-center cursor-pointer rounded overflow-hidden border border-border-200 border-opacity-75 hover:opacity-75"
+            className="w-20 h-20 flex items-center justify-center cursor-pointer rounded overflow-hidden border border-border-200 border-opacity-75 hover:opacity-75"
           >
             <Image
               src={item.src}

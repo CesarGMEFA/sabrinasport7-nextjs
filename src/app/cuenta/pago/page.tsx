@@ -1,9 +1,14 @@
-import FormBilling from '@/components/Forms/FormBilling'
+"use client"
 import React from 'react'
+import FormBilling from '@/components/Forms/FormBilling'
+import { useAuth } from '@/lib/hook/useAuth'
 
 type Props = {}
 
 function Payment({}: Props) {
+
+  useAuth()
+
   return (
     <section className="lg:w-2/4 mx-auto">
       {/* Personal Profile */}

@@ -1,11 +1,14 @@
+"use client";
 import React from "react";
 import FormPersonInfo from "@/components/Forms/FormPersonInfo";
-import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
+
+import { useAuth } from "@/lib/hook/useAuth";
 
 type Props = {};
 
-export default function page({}: Props) {
+export default function Cuenta({}: Props) {
+
+  useAuth()
 
   return (
     <section className="lg:w-2/4 mx-auto">

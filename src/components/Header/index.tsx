@@ -1,16 +1,14 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import MenuAccountHeader from "../Menus/MenuAccountHeader";
 import SheetMenuMobile from "../Menus/SheetMenuMobile";
 
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { ShoppingCart, UserCircle } from "lucide-react";
 import HeaderCart from "./HeaderCart";
 import SearchMobile from "./SearchMobile";
 import SearchDesktop from "./SearchDesktop";
+
+import NavHeader from "../Menus/NavHeader";
 
 type Props = {};
 
@@ -19,7 +17,6 @@ export default function Header({}: Props) {
     <header className="bg-white lg:text-base">
       <section className="p-4 lg:px-8 lg:py-6 flex justify-between items-center mb-4 lg:mb-0">
         <section className="flex items-center">
-
           {/* Logo */}
           <Link href="/">
             <Image
@@ -66,26 +63,7 @@ export default function Header({}: Props) {
       {/* Input Search Mobile */}
       <SearchMobile />
 
-      <nav className="h-8 hidden bg-gray-50 lg:flex lg:justify-evenly lg:items-center font-medium border-red-600 border-b-2">
-        <Link
-          href=""
-          className="h-full px-2 flex items-center bg-red-600 text-white hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white"
-        >
-          opcion 1
-        </Link>
-        <Link href="" className="h-full px-2 flex items-center hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white">
-          opcion 2
-        </Link>
-        <Link href="" className="h-full px-2 flex items-center hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white">
-          opcion 3
-        </Link>
-        <Link href="" className="h-full px-2 flex items-center hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white">
-          opcion 4
-        </Link>
-        <Link href="" className="h-full px-2 flex items-center hover:bg-red-400 hover:text-white focus:bg-red-400 focus:text-white">
-          opcion 5
-        </Link>
-      </nav>
+      <NavHeader />
     </header>
   );
 }

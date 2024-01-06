@@ -1,11 +1,15 @@
+"use client"
 import React from "react";
 import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
 import { OrderCard } from "@/components/Orders/OrderCard";
+import { useAuth } from "@/lib/hook/useAuth";
 
 type Props = {};
 
 function Orders({}: Props) {
+
+  useAuth()
+
   return (
     <section className="lg:px-6 w-full">
       <h1 className="text-2xl font-bold">Ordenes</h1>

@@ -77,7 +77,7 @@ export default function ProductPageComponent({ product, variations }: Props) {
   const attributeSize = product.attributes.find(
     (attribute) => attribute.name === "Talla"
   );
-  console.log("thumbnail => ", thumbsSwiper)
+  // console.log("thumbnail => ", thumbsSwiper)
   return (
     <section className="max-w-7xl mx-auto p-8">
       <section className="flex flex-col lg:justify-between lg:flex-row lg:gap-16 lg:items-center">

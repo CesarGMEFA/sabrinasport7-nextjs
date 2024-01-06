@@ -1,10 +1,11 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useLayoutEffect } from "react";
+import Image from "next/image";
+import { redirect, useRouter } from "next/navigation";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
@@ -18,18 +19,39 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { authenticate } from "@/lib/actions";
+import { Separator } from "@/components/ui/separator";
+
+import { verifyJwtToken } from "@/lib/auth";
+
+import { useUser } from "@/lib/store/user";
+import { useUserStore } from "@/lib/store/useUserStore";
+
+import { UserStore } from "@/lib/interfaces/UserStore.interface";
 
 const FormSchema = z.object({
   email: z.string().email(),
   password: z.string(),
 });
 
+type jwtInfoUser = {
+  success: boolean;
+  data: {
+    jwt: string;
+  };
+};
 const LoginPage = () => {
-  const [errors, setErrors] = useState<string[]>([]);
-  const [email, setEmail] = useState<string>("test@gmail.com");
-  const [password, setPassword] = useState<string>("test");
+  const [loginError, setLoginError] = useState("");
   const router = useRouter();
+
+  const userStore = useUserStore<UserStore, UserStore>(
+    useUser,
+    (state: any) => state
+  );
+
+  const { user, setUser } = userStore || {
+    setUser: () => {},
+    user: {},
+  };
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -40,11 +62,9 @@ const LoginPage = () => {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("=> ", data);
-
     try {
       const res = await fetch(
-        `https://sabrinasport7.com/?rest_route=/simple-jwt-login/v1/auth`,
+        `${process.env.NEXT_PUBLIC_AUTH_URL}`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -54,40 +74,45 @@ const LoginPage = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      const user = await res.json();
-      console.log(user);
+      const userJWT: jwtInfoUser = await res.json();
+
+      if (userJWT.data) {
+        const userData: any = await verifyJwtToken(userJWT.data.jwt);
+        if (userData !== null) {
+          setUser({
+            id: userData.id,
+            username: userData.username,
+          });
+          router.push("/");
+        }
+      }
+      setLoginError("");
     } catch (error) {
+      setLoginError("El inicio de sesión falló. Por favor, intenta de nuevo.");
       console.log(error);
     }
-
-    // try {
-    //   await signIn("credentials", data);
-    // } catch (error) {
-    //   if (error instanceof AuthError) {
-    //     switch (error.type) {
-    //       case "CredentialsSignin":
-    //         return "Invalid credentials.";
-    //       default:
-    //         return "Something went wrong.";
-    //     }
-    //   }
-    //   throw error;
-    // }
-
-    // const responseNextAuth = await signIn("credentials", {
-    //   email,
-    //   password,
-    //   redirect: false,
-    // });
-    // console.log(responseNextAuth);
-    // if (responseNextAuth?.error) {
-    //   setErrors(responseNextAuth.error.split(","));
-    //   return;
-    // }
   }
 
+  useLayoutEffect(() => {
+    if (user.id) {
+      console.log("Hay usuario", user);
+      redirect("/");
+    }
+  }, [user]);
+
   return (
-    <section className="h-screen flex items-center justify-center">
+    <section className="h-screen flex flex-col lg:flex-row items-center justify-center">
+      <Image
+        src={"/logo.png"}
+        alt="logo de Sabrina Sport 7"
+        width={300}
+        height={100}
+      />
+      <Separator className="bg-red-300 w-72 my-3 lg:hidden" />
+      <Separator
+        className="bg-red-300 h-96 mx-3 hidden lg:block"
+        orientation="vertical"
+      />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="w-72 space-y-6">
           <FormField
@@ -113,7 +138,7 @@ const LoginPage = () => {
               <FormItem>
                 <FormLabel>Clave</FormLabel>
                 <FormControl>
-                  <Input placeholder="******" {...field} />
+                  <Input placeholder="******" type="password" {...field} />
                 </FormControl>
                 <FormDescription>
                   Este campo de clave es requerido para iniciar sesión
@@ -123,6 +148,7 @@ const LoginPage = () => {
             )}
           />
           <Button type="submit">Submit</Button>
+          {loginError && <FormMessage>{loginError}</FormMessage>}
         </form>
       </Form>
     </section>
