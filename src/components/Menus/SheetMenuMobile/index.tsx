@@ -3,11 +3,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
-import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetClose,
   SheetTitle,
@@ -21,8 +19,6 @@ import { useUserStore } from "@/lib/store/useUserStore";
 import { UserStore } from "@/lib/interfaces/UserStore.interface";
 
 import { linksDefault, linksUserAuth } from "../LinksMenu";
-
-
 
 export default function SheetMenuMobile() {
   const pathname = usePathname();
@@ -44,11 +40,9 @@ export default function SheetMenuMobile() {
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Menu</SheetTitle>
-          <SheetDescription>Descripcion Sheet</SheetDescription>
         </SheetHeader>
         <SheetContent></SheetContent>
         <section className="flex flex-col items-center sm:items-start">
-          <p>Sheet content</p>
           {linksDefault.map((link) => (
             <Link
               key={link.label}
@@ -85,19 +79,18 @@ export default function SheetMenuMobile() {
           )}
           <Separator className="my-4" />
           {isAuthBoolean() ? (
-            <SheetClose>
-              <Button type="button" onClick={removeUser}>
-                <Power size={18} />
-                <span className="font-bold ml-1">Cerrar Sesion</span>
-              </Button>
+            <SheetClose
+              className="h-10 px-4 py-2 bg-red-600 text-white rounded-md flex items-center"
+              onClick={removeUser}
+            >
+              <Power size={18} />
+              <span className="font-bold ml-1">Cerrar Sesion</span>
             </SheetClose>
           ) : (
             <Link href={"/login"}>
-              <SheetClose>
-                <Button type="button" className="bg-blue-500">
+              <SheetClose className="h-10 px-4 py-2 bg-blue-600 text-white rounded-md flex items-center">
                   <LogIn size={18} />
                   <span className="font-bold ml-1">Iniciar Sesion</span>
-                </Button>
               </SheetClose>
             </Link>
           )}

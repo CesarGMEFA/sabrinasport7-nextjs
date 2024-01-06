@@ -1,7 +1,8 @@
 "use client";
 import Link from "next/link";
-import clsx from "clsx";
 import { usePathname } from "next/navigation";
+import clsx from "clsx";
+import { v4 as uuid } from "uuid";
 
 import {
   Menubar,
@@ -26,6 +27,7 @@ import { useUserStore } from "@/lib/store/useUserStore";
 import { UserStore } from "@/lib/interfaces/UserStore.interface";
 
 import { linksUserAuth } from "../LinksMenu";
+import { Fragment } from "react";
 
 export default function MenuAccountHeader() {
   const pathname = usePathname();
@@ -51,8 +53,8 @@ export default function MenuAccountHeader() {
           </MenubarTrigger>
           <MenubarContent>
             {linksUserAuth.map((link) => (
-              <>
-                <MenubarItem key={link.label}>
+              <Fragment key={uuid()}>
+                <MenubarItem >
                   <Link
                     href={link.href}
                     className={clsx(
@@ -67,7 +69,7 @@ export default function MenuAccountHeader() {
                   </Link>
                 </MenubarItem>
                 <MenubarSeparator />
-              </>
+              </Fragment>
             ))}
             <MenubarItem>
               <Button
