@@ -1,8 +1,10 @@
 import { Suspense } from "react";
+import Link from "next/link";
 
 import ProductCard from "@/components/Product/ProductCard";
 import Pagination from "@/components/Pagination";
 import SiderBar from "@/components/SideBar";
+import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 
 import { getProducts } from "@/lib/api/products";
 
@@ -26,6 +28,8 @@ export default async function TiendaPage({ searchParams }: Props) {
   );
   const actualProducts = products.length;
 
+  const whatsapp_url = "https://wa.me/573053503583?text=Hola! Quiero comprar en tu tienda!"
+
   return (
     <main className="p-4 lg:px-8 lg:py-12 lg:flex lg:flex-col">
       <section className="flex flex-col lg:flex-row">
@@ -46,6 +50,14 @@ export default async function TiendaPage({ searchParams }: Props) {
         actualProducts={actualProducts}
         totalPages={Number(totalPages)}
       />
+
+      <Link
+        href={whatsapp_url}
+        target="_blank"
+        className="bg-whatsapp w-16 h-16 flex flex-row items-center justify-center text-white font-bold rounded-full hover:bg-green-700 fixed bottom-10 right-4"
+      >
+        <WhatsAppIcon />
+      </Link>
     </main>
   );
 }
