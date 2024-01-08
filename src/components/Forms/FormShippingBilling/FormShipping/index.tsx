@@ -84,7 +84,6 @@ export default function FormShipping({ billingShipping: bs, id }: Props) {
         },
       };
       const result = await putCustomer(id, s);
-      console.log(s);
 
       if (result) {
         toast({

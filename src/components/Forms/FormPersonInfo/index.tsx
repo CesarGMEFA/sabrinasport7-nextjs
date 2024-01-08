@@ -59,7 +59,6 @@ export default function FormPersonInfo({ c, id }: Props) {
       };
 
       const result = await putCustomer(id, customerData);
-      console.log(customerData);
 
       if (result) {
         toast({

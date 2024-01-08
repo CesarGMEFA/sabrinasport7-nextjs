@@ -91,8 +91,7 @@ export default function FormBillingShipping({
         },
       };
       const result = await putCustomer(id, b);
-      console.log("billing data => ", b);
-console.log("result => ", result)
+
       if (result) {
         toast({
           variant: "success",
