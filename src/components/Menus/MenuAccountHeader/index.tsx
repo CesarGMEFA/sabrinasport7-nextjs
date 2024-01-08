@@ -42,9 +42,9 @@ export default function MenuAccountHeader() {
   };
   if (isAuthBoolean()) {
     return (
-      <Menubar className="">
+      <Menubar className="cursor-pointer">
         <MenubarMenu>
-          <MenubarTrigger>
+          <MenubarTrigger className="cursor-pointer">
             <UserCircle size={28} className="mr-1" />
             <div className="flex items-center">
               {user?.username}
