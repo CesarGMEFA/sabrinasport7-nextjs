@@ -98,6 +98,7 @@ console.log("result => ", result)
           variant: "success",
           title: "Dirección de envío actualizado.",
           description: "Tu dirección ha sido actualizado.",
+          duration: 1200,
         });
       }
     } catch (error) {

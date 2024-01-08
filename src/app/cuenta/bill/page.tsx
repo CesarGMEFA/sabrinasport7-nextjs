@@ -1,5 +1,5 @@
 import React from 'react'
-import PaymentAddress from '@/components/Address/PaymentAddress/index'
+import PaymentAddress from '@/components/Account/Address/PaymentAddress'
 import { getCustomer } from '@/lib/api/customer/getCustomer'
 
 type Props = {}

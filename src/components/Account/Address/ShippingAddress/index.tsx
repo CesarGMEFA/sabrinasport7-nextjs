@@ -1,6 +1,6 @@
 "use client";
 
-import FormShipping from "../../Forms/FormShippingBilling/FormShipping";
+import FormShipping from "@/components/Forms/FormShippingBilling/FormShipping";
 
 import { Customer } from "@/lib/interfaces/Customer.interface";
 import { useAuth } from "@/lib/hook/useAuth";

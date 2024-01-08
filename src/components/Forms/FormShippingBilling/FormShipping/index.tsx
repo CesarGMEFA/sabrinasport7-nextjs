@@ -91,6 +91,7 @@ export default function FormShipping({ billingShipping: bs, id }: Props) {
           variant: "success",
           title: "Dirección de envío actualizado.",
           description: "Tu dirección ha sido actualizado.",
+          duration: 1200,
         });
       }
     } catch (error) {
@@ -242,17 +243,14 @@ export default function FormShipping({ billingShipping: bs, id }: Props) {
             </FormItem>
           )}
         />
-        { loading ? (
+        {loading ? (
           <div className=" w-12 rounded-md py-2 px-4 bg-red-600 text-center flex items-center justify-center">
             <Loading size={24} />
           </div>
         ) : (
-          <Button
-          type="submit"
-          disabled={!form.formState.isDirty}
-        >
-          Guardar
-        </Button>
+          <Button type="submit" disabled={!form.formState.isDirty}>
+            Guardar
+          </Button>
         )}
       </form>
     </Form>

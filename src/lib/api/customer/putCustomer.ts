@@ -1,10 +1,17 @@
 import { WOO_URL, CK, CS } from "@/lib/api/config";
-import { Shipping, Billing } from "@/lib/interfaces/Customer.interface";
+import {
+  Shipping,
+  Billing,
+  Customer,
+} from "@/lib/interfaces/Customer.interface";
 
 type Data = {
-    shipping?: Shipping;
-    billing?: Billing;
-}
+  shipping?: Shipping;
+  billing?: Billing;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+};
 export async function putCustomer(id: number, data: Data) {
   const url = new URL(`/wp-json/wc/v3/customers/${id}`, WOO_URL);
   url.searchParams.append("consumer_key", CK ?? "");
