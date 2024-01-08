@@ -1,17 +1,18 @@
-import ShippingAddress from '@/components/Address/ShippingAddress/index'
+import React from 'react'
+import PaymentAddress from '@/components/Address/PaymentAddress/index'
 import { getCustomer } from '@/lib/api/customer/getCustomer'
 
 type Props = {}
 
-async function Address({}: Props) {
+async function Payment({}: Props) {
 
   const c = await getCustomer(8)
 
   return (
     <section className="lg:w-2/4 mx-auto">
-      <ShippingAddress c={c} />
+      <PaymentAddress c={c} />
     </section>
   )
 }
 
-export default Address
+export default Payment

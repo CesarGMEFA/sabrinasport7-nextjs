@@ -23,11 +23,11 @@ export const linksUserAuth = [
     label: "Dirección de envio",
   },
   {
-    href: "/cuenta/ordenes",
-    label: "Ordenes",
+    href: "/cuenta/bill",
+    label: "Dirección de facturación",
   },
   {
-    href: "/cuenta/pago",
-    label: "Método de pago",
+    href: "/cuenta/ordenes",
+    label: "Ordenes",
   },
 ];

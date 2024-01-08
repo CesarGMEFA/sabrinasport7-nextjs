@@ -1,4 +1,9 @@
 "use client";
+import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -9,11 +14,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { useToast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
+import { Loading } from "@/components/ui/Loading";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
+import { putCustomer } from "@/lib/api/customer/putCustomer";
+import { Billing } from "@/lib/interfaces/Customer.interface";
 
 const formSchema = z.object({
   first_name: z.string().min(2, {
@@ -47,26 +53,58 @@ const formSchema = z.object({
   }),
 });
 
-export default function FormPersonInfo() {
+type Props = {
+  id: number;
+  billingShipping: Billing;
+};
+export default function FormBillingShipping({
+  billingShipping: bs,
+  id,
+}: Props) {
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      first_name: "Cesar" || "",
-      last_name: "Doe" || "",
-      company: "Cesar Company" || "",
-      address_1: "Cesar Address 1" || "",
-      address_2: "Cesar Address 2" || "",
-      city: "Cesar City" || "",
-      state: "Cesar State" || "",
-      postcode: "Cesar Postcode" || "",
-      country: "Cesar Country" || "",
+      first_name: bs.first_name || "",
+      last_name: bs.last_name || "",
+      company: bs.company || "",
+      address_1: bs.address_1 || "",
+      address_2: bs.address_2 || "",
+      city: bs.city || "",
+      state: bs.state || "",
+      postcode: bs.postcode || "",
+      country: bs.country || "",
       email: "cesar@email.com" || "",
       phone: "04141234567" || "",
     },
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    try {
+      setLoading(true);
+      const b = {
+        billing: {
+          ...data,
+          company: data.company || "",
+          address_2: data.address_2 || "",
+        },
+      };
+      const result = await putCustomer(id, b);
+      console.log("billing data => ", b);
+console.log("result => ", result)
+      if (result) {
+        toast({
+          variant: "success",
+          title: "Dirección de envío actualizado.",
+          description: "Tu dirección ha sido actualizado.",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -79,10 +117,7 @@ export default function FormPersonInfo() {
             <FormItem>
               <FormLabel>Nombre</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="escribe tu nombre aqui"
-                  {...field}
-                />
+                <Input placeholder="escribe tu nombre aqui" {...field} />
               </FormControl>
               <FormDescription>Este es tu nombre.</FormDescription>
               <FormMessage />
@@ -96,10 +131,7 @@ export default function FormPersonInfo() {
             <FormItem>
               <FormLabel>Apellido</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="escribe tu apellido aqui"
-                  {...field}
-                />
+                <Input placeholder="escribe tu apellido aqui" {...field} />
               </FormControl>
               <FormDescription>Este es tu apellido.</FormDescription>
               <FormMessage />
@@ -176,7 +208,7 @@ export default function FormPersonInfo() {
           name="postcode"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>C&otilde;digo Postal</FormLabel>
+              <FormLabel>C&oacute;digo Postal</FormLabel>
               <FormControl>
                 <Input placeholder="ejemplo: 2003" {...field} />
               </FormControl>
@@ -208,10 +240,7 @@ export default function FormPersonInfo() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="ejemplo@mail.com"
-                  {...field}
-                />
+                <Input placeholder="ejemplo@mail.com" {...field} />
               </FormControl>
               <FormDescription>
                 Nosotros no compatiremos tu email.
@@ -225,7 +254,7 @@ export default function FormPersonInfo() {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>N&utilde;mero telef&oacute;nico</FormLabel>
+              <FormLabel>N&uacute;mero telef&oacute;nico</FormLabel>
               <FormControl>
                 <Input placeholder="numero telefonico" {...field} />
               </FormControl>
@@ -236,9 +265,15 @@ export default function FormPersonInfo() {
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={!form.formState.isDirty}>
-          Submit
-        </Button>
+        {loading ? (
+          <div className=" w-12 rounded-md py-2 px-4 bg-red-600 text-center flex items-center justify-center">
+            <Loading size={24} />
+          </div>
+        ) : (
+          <Button type="submit" disabled={!form.formState.isDirty}>
+            Guardar
+          </Button>
+        )}
       </form>
     </Form>
   );

@@ -44,35 +44,35 @@ export default function SheetMenuMobile() {
         <SheetContent></SheetContent>
         <section className="flex flex-col items-center sm:items-start">
           {linksDefault.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className={clsx(
-                "hover:underline hover:underline-offset-4 hover:decoration-red-500 my-0.5",
-                {
-                  "underline underline-offset-4 decoration-red-500":
-                    pathname === link.href,
-                }
-              )}
-            >
-              {link.label}
+            <Link key={link.label} href={link.href}>
+              <SheetClose
+                className={clsx(
+                  "hover:underline hover:underline-offset-4 hover:decoration-red-500 my-0.5",
+                  {
+                    "underline underline-offset-4 decoration-red-500":
+                      pathname === link.href,
+                  }
+                )}
+              >
+                {link.label}
+              </SheetClose>
             </Link>
           ))}
           {isAuthBoolean() && (
             <>
               {linksUserAuth.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className={clsx(
-                    "hover:underline hover:underline-offset-4 hover:decoration-red-500 my-0.5",
-                    {
-                      "underline underline-offset-4 decoration-red-500":
-                        pathname === link.href,
-                    }
-                  )}
-                >
-                  {link.label}
+                <Link key={link.label} href={link.href}>
+                  <SheetClose
+                    className={clsx(
+                      "hover:underline hover:underline-offset-4 hover:decoration-red-500 my-0.5",
+                      {
+                        "underline underline-offset-4 decoration-red-500":
+                          pathname === link.href,
+                      }
+                    )}
+                  >
+                    {link.label}
+                  </SheetClose>
                 </Link>
               ))}
             </>
@@ -89,8 +89,8 @@ export default function SheetMenuMobile() {
           ) : (
             <Link href={"/login"}>
               <SheetClose className="h-10 px-4 py-2 bg-blue-600 text-white rounded-md flex items-center">
-                  <LogIn size={18} />
-                  <span className="font-bold ml-1">Iniciar Sesion</span>
+                <LogIn size={18} />
+                <span className="font-bold ml-1">Iniciar Sesion</span>
               </SheetClose>
             </Link>
           )}

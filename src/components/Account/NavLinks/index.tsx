@@ -19,7 +19,7 @@ const links = [
     href: "/cuenta/direccion",
     icon: MapPinned,
   },
-  { name: "Método de pago", href: "/cuenta/pago", icon: CircleDollarSign },
+  { name: "Dirección de facturación", href: "/cuenta/bill", icon: CircleDollarSign },
   { name: "Ordenes", href: "/cuenta/ordenes", icon: TableProperties },
 ];
 

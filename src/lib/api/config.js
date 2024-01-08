@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export const WOO_URL = "https://sabrinasport7.com/wp-json/wc/v3";
-export const CK = process.env.NEXTJS_APP_WOO_CK;
-export const CS = process.env.NEXTJS_APP_WOO_CS;
+export const CK = process.env.NEXT_PUBLIC_APP_WOO_CK;
+export const CS = process.env.NEXT_PUBLIC_APP_WOO_CS;
 
 const api = axios.create({
   baseURL: WOO_URL,

@@ -3,6 +3,7 @@ import { Lato } from 'next/font/google'
 import './globals.css'
 
 import Header from '@/components/Header'
+import { Toaster } from "@/components/ui/toaster"
 
 const lato  = Lato({subsets: ['latin'], weight: ['400', '700'] })
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={`bg-gray-100 max-w-[1950px] mx-auto ${lato.className}`}>
         <Header/>
         {children}
+        <Toaster />
       </body>
     </html>
   )
