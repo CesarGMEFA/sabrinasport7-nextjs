@@ -54,7 +54,7 @@ export default async function TiendaPage({ searchParams }: Props) {
       <Link
         href={whatsapp_url}
         target="_blank"
-        className="bg-whatsapp w-16 h-16 flex flex-row items-center justify-center text-white font-bold rounded-full hover:bg-green-700 fixed bottom-10 right-4"
+        className="bg-whatsapp w-16 h-16 flex flex-row items-center justify-center text-white font-bold rounded-full hover:bg-green-700 fixed bottom-32 right-4"
       >
         <WhatsAppIcon />
       </Link>
