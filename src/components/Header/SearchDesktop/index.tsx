@@ -15,7 +15,7 @@ export default function SearchDesktop({}: Props) {
 
   const handleSearch = (term: string) => {
     const params = new URLSearchParams(searchParams);
-console.log(pathname)
+
     if (term) {
       params.set("search", term);
     } else {
