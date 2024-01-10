@@ -60,7 +60,6 @@ export default function ProductPageComponent({ product, variations }: Props) {
   });
 
   const onSubmit = (data: any) => {
-
     data.id = product.id;
     data.name = product.name;
     data.imgSrc = product.images[0].src;
@@ -272,7 +271,8 @@ export default function ProductPageComponent({ product, variations }: Props) {
                 </span>
                 <button
                   type="button"
-                  className="bg-gray-200 py-2 px-4 rounded-lg text-red-800 text-3xl"
+                  disabled={amount === product.stock_quantity}
+                  className="bg-gray-200 py-2 px-4 rounded-lg text-red-800 text-3xl disabled:opacity-50 disabled:cursor-not-allowed"
                   onClick={() => setAmount((prev) => prev + 1)}
                 >
                   +
@@ -299,7 +299,7 @@ export default function ProductPageComponent({ product, variations }: Props) {
         </section>
       </section>
 
-      {/* Productos Relacionados */}
+      {/* Related Products */}
       <section className="mt-12">
         <h2 className="text-2xl font-bold mb-6">Productos Relacionados</h2>
         {/* Productos Relacionados */}

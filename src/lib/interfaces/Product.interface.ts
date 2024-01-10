@@ -35,7 +35,7 @@ export interface Product {
   tax_status: string;
   tax_class: string;
   manage_stock: boolean;
-  stock_quantity: any;
+  stock_quantity: number;
   stock_status: string;
   backorders: string;
   backorders_allowed: boolean;
