@@ -60,7 +60,7 @@ export default function ProductPageComponent({ product, variations }: Props) {
   });
 
   const onSubmit = (data: any) => {
-    // console.log("data de antes => ", data)
+
     data.id = product.id;
     data.name = product.name;
     data.imgSrc = product.images[0].src;
@@ -70,7 +70,7 @@ export default function ProductPageComponent({ product, variations }: Props) {
     add(data);
     setAmount(1);
   };
-  console.log(product);
+
   const attributeColor = product.attributes.find(
     (attribute) => attribute.name === "Color"
   );
@@ -78,7 +78,7 @@ export default function ProductPageComponent({ product, variations }: Props) {
   const attributeSize = product.attributes.find(
     (attribute) => attribute.name === "Talla"
   );
-  // console.log("thumbnail => ", thumbsSwiper)
+
   return (
     <section className="max-w-7xl mx-auto p-8">
       <section className="chequear mb-9 flex flex-col lg:justify-between lg:flex-row lg:gap-16 lg:items-center">
