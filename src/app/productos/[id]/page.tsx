@@ -1,5 +1,7 @@
 import ProductPageComponent from "@/components/Product/ProductPage";
-import { getProduct, getProductVariations } from "@/lib/api/products";
+import { getProductVariations } from "@/lib/api/products/getProductVariations";
+import { getProduct } from "@/lib/api/products/getProduct";
+
 import { Product } from "@/lib/interfaces/Product.interface";
 
 type Props = {
@@ -15,7 +17,7 @@ export default async function ProductPage({ params }: Props) {
   const data = await getProduct(Number(id));
 
   if (data.variations.length > 0) {
-    variations = await getProductVariations(data)
+    variations = await getProductVariations(data);
   }
 
   return <ProductPageComponent product={data} variations={variations} />;

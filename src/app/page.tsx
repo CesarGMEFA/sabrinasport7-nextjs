@@ -6,7 +6,7 @@ import Pagination from "@/components/Pagination";
 import SiderBar from "@/components/SideBar";
 import WhatsAppIcon from "@/components/icons/WhatsAppIcon";
 
-import { getProducts } from "@/lib/api/products";
+import { getProducts } from "@/lib/api/products/getProducts";
 
 type Props = {
   searchParams: {

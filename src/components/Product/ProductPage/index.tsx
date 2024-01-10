@@ -17,6 +17,7 @@ import { useCartStore } from "@/lib/store/cart";
 
 import ProductPageImage from "./ProductPageImage";
 import CarouselThumbs from "./CarouselThumbs";
+import CarouselProductsRelated from "./CarouselProductsRelated";
 
 type Props = {
   product: Product;
@@ -69,7 +70,7 @@ export default function ProductPageComponent({ product, variations }: Props) {
     add(data);
     setAmount(1);
   };
-
+  console.log(product);
   const attributeColor = product.attributes.find(
     (attribute) => attribute.name === "Color"
   );
@@ -80,7 +81,7 @@ export default function ProductPageComponent({ product, variations }: Props) {
   // console.log("thumbnail => ", thumbsSwiper)
   return (
     <section className="max-w-7xl mx-auto p-8">
-      <section className="flex flex-col lg:justify-between lg:flex-row lg:gap-16 lg:items-center">
+      <section className="chequear mb-9 flex flex-col lg:justify-between lg:flex-row lg:gap-16 lg:items-center">
         {/* Image Gallery */}
         <div className="flex flex-col gap-4 lg:w-2/4">
           <ProductPageImage
@@ -297,6 +298,25 @@ export default function ProductPageComponent({ product, variations }: Props) {
           </Link>
         </section>
       </section>
+
+      {/* Productos Relacionados */}
+      <section className="mt-12">
+        <h2 className="text-2xl font-bold mb-6">Productos Relacionados</h2>
+        {/* Productos Relacionados */}
+        <CarouselProductsRelated product={product} />
+      </section>
+
+      {/* Product Description */}
+      {product.description && (
+        <section className="mt-12 flex flex-col md:flex-wrap justify-start">
+          <section className="md:w-2/4 pr-4">
+            <h2 className="text-2xl font-bold mb-4">Descripción</h2>
+            <div className="text-black">
+              {ReactHtmlParser(product.description)}
+            </div>
+          </section>
+        </section>
+      )}
     </section>
   );
 }
