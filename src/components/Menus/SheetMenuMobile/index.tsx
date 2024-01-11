@@ -11,7 +11,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { LogIn, Menu, Power } from "lucide-react";
+import { ClipboardSignature, LogIn, Menu, Power } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 import { useUser } from "@/lib/store/user";
@@ -87,12 +87,20 @@ export default function SheetMenuMobile() {
               <span className="font-bold ml-1">Cerrar Sesion</span>
             </SheetClose>
           ) : (
-            <Link href={"/login"}>
-              <SheetClose className="h-10 px-4 py-2 bg-blue-600 text-white rounded-md flex items-center">
-                <LogIn size={18} />
-                <span className="font-bold ml-1">Iniciar Sesion</span>
-              </SheetClose>
-            </Link>
+            <section className="flex flex-col items-center sm:items-start">
+              <Link href={"/login"}>
+                <SheetClose className="h-10 w-40 px-4 py-2 mb-4 bg-blue-600 text-white rounded-md flex items-center justify-center">
+                  <LogIn size={18} />
+                  <span className="font-bold ml-1">Iniciar Sesion</span>
+                </SheetClose>
+              </Link>
+              <Link href={"/registro"}>
+                <SheetClose className="h-10 w-40 px-4 py-2 bg-red-600 text-white rounded-md flex items-center justify-center">
+                  <ClipboardSignature size={18} />
+                  <span className="font-bold ml-1">Registrarse</span>
+                </SheetClose>
+              </Link>
+            </section>
           )}
         </section>
       </SheetContent>
