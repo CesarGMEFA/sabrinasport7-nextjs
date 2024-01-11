@@ -48,7 +48,7 @@ export default function SiderBar({}: Props) {
   };
 
   return (
-    <section className="h-max shadow-md flex items-center justify-start flex-col lg:bg-white lg:w-72 lg:py-12">
+    <section className="h-max lg:shadow-md flex items-center justify-start flex-col lg:bg-white lg:w-72 lg:py-12">
       {/* Select Mobile */}
       <section className="mb-5 lg:hidden">
         <Select onValueChange={(e) => handleChange(e.toString())}>
